@@ -1,0 +1,22 @@
+.containerHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+li {
+  list-style: none;
+}
+
+.containerHome a {
+  font-size: 3rem;
+  color: white;
+}
