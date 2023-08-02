@@ -21,9 +21,36 @@ $navbarHeight: 9.1rem;
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
   background-color: $black;
   width: 11.7rem;
   height: calc(100vh - $navbarHeight);
+}
+
+.sidebar::before {
+  content: '';
+  flex: 1;
+}
+
+.iconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 2rem;
+}
+
+.sidebarText {
+  flex: 1;
+  text-align: center;
+  color: $white;
+  line-height: 2.4rem;
+  font-size: 1.2rem;
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
 }
 
 .logo {

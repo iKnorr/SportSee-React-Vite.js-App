@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Logo } from '../icons/Logo';
 import styles from './Navbar.module.scss';
+import { YogaIcon } from '../icons/YogaIcon';
+import { Swimming } from '../icons/Swimming';
+import { WeightLifting } from '../icons/WeightLifting';
+import { Cycling } from '../icons/Cycling';
 
 export const Navbar = ({
   children,
@@ -30,7 +34,15 @@ export const Navbar = ({
         </div>
       </div>
       <div className={styles.horizontalWrapper}>
-        <div className={styles.sidebar}></div>
+        <div className={styles.sidebar}>
+          <div className={styles.iconWrapper}>
+            <YogaIcon />
+            <Swimming />
+            <Cycling />
+            <WeightLifting />
+          </div>
+          <p className={styles.sidebarText}>Copiryght, SportSee 2020</p>
+        </div>
         <div>{children}</div>
       </div>
     </div>
