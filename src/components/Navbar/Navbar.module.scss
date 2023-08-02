@@ -15,6 +15,11 @@ $navbarHeight: 9.1rem;
   color: $red;
 }
 
+.childrenContainer {
+  width: 100%;
+  height: calc(100vh - $navbarHeight);
+}
+
 .horizontalWrapper {
   display: flex;
   flex-direction: row;
@@ -23,7 +28,6 @@ $navbarHeight: 9.1rem;
 .sidebar {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
   background-color: $black;
   width: 11.7rem;

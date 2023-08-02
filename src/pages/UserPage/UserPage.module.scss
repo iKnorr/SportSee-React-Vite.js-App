@@ -1,5 +1,18 @@
 @import '../../variables';
 
 .mainContainer {
+  height: 100%;
+  border: solid 1px grey;
+  padding: 4rem 11rem;
   background-color: $white;
+}
+
+.greeting {
+  display: flex;
+  gap: 1rem;
+  font-size: 4.8rem;
+}
+
+.name {
+  color: $red;
 }

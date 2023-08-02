@@ -43,19 +43,20 @@ export const UserPage = () => {
   const { id, userInfos, score, keyData } = userData.data;
 
   return (
-    <>
-      <Navbar>
-        <div className={styles.mainContainer}>
-          <div>{id}</div>
-          <div>{userInfos.firstName}</div>
-          <div>{userInfos.lastName}</div>
-          <div>{score}</div>
-          <div>{keyData.calorieCount}</div>
-          <div>{keyData.carbohydrateCount}</div>
-          <div>{keyData.lipidCount}</div>
-          <div>{keyData.proteinCount}</div>
+    <Navbar>
+      <div className={styles.mainContainer}>
+        <div className={styles.greeting}>
+          <span>Bonjour</span>
+          <span className={styles.name}>{`${userInfos.firstName}`}</span>
         </div>
-      </Navbar>
-    </>
+        <div>{id}</div>
+        <div>{userInfos.lastName}</div>
+        <div>{score}</div>
+        <div>{keyData.calorieCount}</div>
+        <div>{keyData.carbohydrateCount}</div>
+        <div>{keyData.lipidCount}</div>
+        <div>{keyData.proteinCount}</div>
+      </div>
+    </Navbar>
   );
 };

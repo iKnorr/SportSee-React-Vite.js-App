@@ -43,7 +43,7 @@ export const Navbar = ({
           </div>
           <p className={styles.sidebarText}>Copiryght, SportSee 2020</p>
         </div>
-        <div>{children}</div>
+        <div className={styles.childrenContainer}>{children}</div>
       </div>
     </div>
   );
