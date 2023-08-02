@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from 'react-router-dom';
-import styles from './ErrorPage.module.css';
+import styles from './ErrorPage.module.scss';
 
 export const ErrorPage = () => {
   return (

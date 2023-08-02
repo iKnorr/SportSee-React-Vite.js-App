@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from './UserPage.module.css';
+import styles from './UserPage.module.scss';
 import { fetchUserData } from '../../services/userService';
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
@@ -44,17 +44,18 @@ export const UserPage = () => {
 
   return (
     <>
-      <Navbar />
-      <div className={styles.mainContainer}>
-        <div>{id}</div>
-        <div>{userInfos.firstName}</div>
-        <div>{userInfos.lastName}</div>
-        <div>{score}</div>
-        <div>{keyData.calorieCount}</div>
-        <div>{keyData.carbohydrateCount}</div>
-        <div>{keyData.lipidCount}</div>
-        <div>{keyData.proteinCount}</div>
-      </div>
+      <Navbar>
+        <div className={styles.mainContainer}>
+          <div>{id}</div>
+          <div>{userInfos.firstName}</div>
+          <div>{userInfos.lastName}</div>
+          <div>{score}</div>
+          <div>{keyData.calorieCount}</div>
+          <div>{keyData.carbohydrateCount}</div>
+          <div>{keyData.lipidCount}</div>
+          <div>{keyData.proteinCount}</div>
+        </div>
+      </Navbar>
     </>
   );
 };

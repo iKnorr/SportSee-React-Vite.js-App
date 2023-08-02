@@ -1,0 +1,27 @@
+@import '../../variables';
+
+.containerHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('https://images.pexels.com/photos/34514/spot-runs-start-la.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+  color: $white;
+
+  h1 {
+    font-size: 6rem;
+    text-shadow: 1px 2px #444;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.containerHome a {
+  font-size: 3rem;
+  color: $white;
+}
