@@ -1,0 +1,30 @@
+@import '../../variables';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  height: 12.4rem;
+  width: 25.8rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: $lightGrey;
+}
+
+.textWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 6rem;
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: $grey;
+  }
+}

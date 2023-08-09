@@ -4,9 +4,9 @@ const BASE_URL = 'http://localhost:3000';
 
 export const fetchUserData = async (
   userId: string | undefined,
-  endpoint?: 'activity | "performance' | 'average-sessions'
+  endpoint?: 'activity' | 'performance' | 'average-sessions'
 ) => {
-  const endpointSegment = endpoint ? `/${endpoint}` : '';
+  const endpointSegment = endpoint ? `${endpoint}` : '';
 
   try {
     const response = await axios(

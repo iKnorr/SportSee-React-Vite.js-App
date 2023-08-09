@@ -8,6 +8,12 @@ import {
   ChartData,
   RadialChartScore,
 } from '../../components/RadialChartScore/RadialChartScore';
+import { KeyDataCard } from '../../components/KeyDataCard/KeyDataCard';
+import { Calories } from '../../components/icons/Calories';
+import { Protein } from '../../components/icons/Protein';
+import { Carbs } from '../../components/icons/Carbs';
+import { Fat } from '../../components/icons/Fat';
+import { BarChartActivity } from '../../components/BarChartActivity/BarChartActivity';
 
 type APIResponse = {
   data: UserMainData;
@@ -40,7 +46,7 @@ export const UserPage = () => {
 
   if (!userData) return null;
 
-  const { id, userInfos, todayScore, score, keyData } = userData.data;
+  const { userInfos, todayScore, score, keyData } = userData.data;
   console.log(userData);
 
   const scoreValue = (todayScore ?? score) || 0;
@@ -56,23 +62,45 @@ export const UserPage = () => {
   return (
     <Navbar>
       <div className={styles.mainContainer}>
-        <div className={styles.greeting}>
-          <span>Bonjour</span>
-          <span className={styles.name}>{`${userInfos.firstName}`}</span>
+        <div>
+          <div className={styles.greeting}>
+            <span>Bonjour</span>
+            <span className={styles.name}>{`${userInfos.firstName}`}</span>
+          </div>
+          <p className={styles.subHeading}>
+            Félicitation ! Vous avez explosé vos objectifs hier 👏
+          </p>
         </div>
-        <p className={styles.subHeading}>
-          Félicitation ! Vous avez explosé vos objectifs hier 👏
-        </p>
-        {typeof (todayScore || score) === 'number' && (
-          <RadialChartScore data={chartData} />
-        )}
-        <div>{id}</div>
-        <div>{userInfos.lastName}</div>
-        <div>{todayScore}</div>
-        <div>{keyData.calorieCount}</div>
-        <div>{keyData.carbohydrateCount}</div>
-        <div>{keyData.lipidCount}</div>
-        <div>{keyData.proteinCount}</div>
+        <div className={styles.contentContainer}>
+          <div>
+            <BarChartActivity userId={userId} />
+            {typeof (todayScore || score) === 'number' && (
+              <RadialChartScore data={chartData} />
+            )}
+          </div>
+          <div className={styles.keyDataContainer}>
+            <KeyDataCard
+              dietaryTypes="Calories"
+              icon={<Calories />}
+              amount={`${keyData.calorieCount}kCal`}
+            />
+            <KeyDataCard
+              dietaryTypes="Proteines"
+              icon={<Protein />}
+              amount={`${keyData.proteinCount}g`}
+            />
+            <KeyDataCard
+              dietaryTypes="Glucides"
+              icon={<Carbs />}
+              amount={`${keyData.carbohydrateCount}g`}
+            />
+            <KeyDataCard
+              dietaryTypes="Lipides"
+              icon={<Fat />}
+              amount={`${keyData.lipidCount}kCal`}
+            />
+          </div>
+        </div>
       </div>
     </Navbar>
   );

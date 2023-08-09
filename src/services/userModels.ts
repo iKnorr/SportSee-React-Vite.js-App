@@ -50,3 +50,27 @@ export class UserMainData {
     this.score = score;
   }
 }
+
+// Activity
+
+class Sessions {
+  calories: number;
+  day: string;
+  kilogram: number;
+
+  constructor(calories: number, day: string, kilogram: number) {
+    this.calories = calories;
+    this.day = day;
+    this.kilogram = kilogram;
+  }
+}
+
+export class UserActivityData {
+  userId: number;
+  sessions: Sessions[];
+
+  constructor(userId: number, sessions: Sessions[]) {
+    this.userId = userId;
+    this.sessions = sessions;
+  }
+}
