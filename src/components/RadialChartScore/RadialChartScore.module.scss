@@ -1,0 +1,47 @@
+@import '../../variables';
+
+.radialBarChartWrapper {
+  position: relative;
+  height: 26.3rem;
+  width: 25.8rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: $lightGrey;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.innerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+  p:first-child {
+    font-size: 2.6rem;
+    color: $black;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 2.6rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $grey;
+  }
+}
+
+.chart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+}

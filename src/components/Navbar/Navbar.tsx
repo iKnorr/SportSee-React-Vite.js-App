@@ -36,10 +36,18 @@ export const Navbar = ({
       <div className={styles.horizontalWrapper}>
         <div className={styles.sidebar}>
           <div className={styles.iconWrapper}>
-            <YogaIcon />
-            <Swimming />
-            <Cycling />
-            <WeightLifting />
+            <Link to="/">
+              <YogaIcon />
+            </Link>
+            <Link to="/">
+              <Swimming />
+            </Link>
+            <Link to="/">
+              <Cycling />
+            </Link>
+            <Link to="/</div>">
+              <WeightLifting />
+            </Link>
           </div>
           <p className={styles.sidebarText}>Copiryght, SportSee 2020</p>
         </div>
