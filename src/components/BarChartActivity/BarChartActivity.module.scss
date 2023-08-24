@@ -1,1 +1,28 @@
 @import '../../variables';
+
+.container {
+  height: 40rem;
+  width: 100%;
+  background-color: $lightGrey;
+}
+
+.customTooltip {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 3.9rem;
+  height: 6.3rem;
+  background-color: $red;
+  color: $white;
+  font-size: 0.7rem;
+}
+
+.headingContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem;
+  font-size: 1.5rem;
+}

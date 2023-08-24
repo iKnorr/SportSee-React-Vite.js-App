@@ -6,15 +6,22 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
+import { BarChartLegendList } from '../BarChartLegend/BarChartLegendList';
+import { CustomTooltip } from './CustomTooltip';
 
 type APIResponse = {
   data: UserActivityData;
+};
+
+type Session = {
+  day: string;
+  kilogram: number;
+  calories: number;
 };
 
 export const BarChartActivity = ({ userId }: { userId?: string }) => {
@@ -26,6 +33,11 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
     const fetchData = async () => {
       try {
         const response = await fetchUserData(userId, 'activity');
+        response?.data?.data?.sessions?.forEach((session: Session) => {
+          const date = new Date(session.day);
+          const day = date.getDate();
+          session.day = day.toString();
+        });
 
         setActivityUserData({
           data: new UserActivityData(
@@ -44,24 +56,23 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
 
   const { sessions } = userActivityData.data;
 
-  const modifiedDate = (date: string) => {
-    const newDate = new Date(date);
-    const dayOfMonth = newDate.getDate();
-    return dayOfMonth;
-  };
-
-  console.log(sessions);
   return (
     <div className={styles.container}>
-      <ResponsiveContainer width={835} height={320}>
+      <div className={styles.headingContainer}>
+        <span>Activité quotidienne</span>
+        <BarChartLegendList />
+      </div>
+      <ResponsiveContainer width="100%" height={340}>
         <BarChart
           data={sessions}
           margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 80,
+            top: 10,
+            right: 10,
+            left: 30,
+            bottom: 10,
           }}
+          barSize={7}
+          barGap={7}
         >
           <CartesianGrid
             strokeDasharray="2"
@@ -71,24 +82,19 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
           <XAxis
             axisLine={false}
             tickLine={false}
-            dataKey={modifiedDate('day')}
-            padding={{ left: 10, right: 10 }}
+            dataKey={'day'}
+            tickMargin={10}
           />
           <YAxis
             tickLine={false}
             axisLine={false}
             dataKey="calories"
             orientation="right"
+            domain={[0, 'dataMax + 10']}
           />
-          <Tooltip />
-          <Legend
-            verticalAlign="top"
-            align="right"
-            height={80}
-            iconType="circle"
-          />
-          <Bar dataKey="kilogram" fill="black" barSize={7} />
-          <Bar dataKey="calories" fill="red" barSize={7} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey="kilogram" fill="black" radius={[3, 3, 0, 0]} />
+          <Bar dataKey="calories" fill="red" radius={[3, 3, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

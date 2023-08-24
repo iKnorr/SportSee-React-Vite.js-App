@@ -3,7 +3,7 @@
 $navbarHeight: 9.1rem;
 
 .navbarWrapper {
-  height: 100vh;
+  height: 100%;
 }
 
 .navbar {
@@ -17,12 +17,14 @@ $navbarHeight: 9.1rem;
 
 .childrenContainer {
   width: 100%;
-  height: calc(100vh - $navbarHeight);
+  height: 100%;
+  // height: calc(100vh - $navbarHeight);
 }
 
 .horizontalWrapper {
   display: flex;
   flex-direction: row;
+  // height: 100%;
 }
 
 .sidebar {
@@ -31,7 +33,6 @@ $navbarHeight: 9.1rem;
   align-items: center;
   background-color: $black;
   width: 11.7rem;
-  height: calc(100vh - $navbarHeight);
 }
 
 .sidebar::before {

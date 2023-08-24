@@ -1,0 +1,16 @@
+@import '../../variables';
+
+.listContainer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: $grey;
+}

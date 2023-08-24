@@ -8,12 +8,8 @@ import {
   ChartData,
   RadialChartScore,
 } from '../../components/RadialChartScore/RadialChartScore';
-import { KeyDataCard } from '../../components/KeyDataCard/KeyDataCard';
-import { Calories } from '../../components/icons/Calories';
-import { Protein } from '../../components/icons/Protein';
-import { Carbs } from '../../components/icons/Carbs';
-import { Fat } from '../../components/icons/Fat';
 import { BarChartActivity } from '../../components/BarChartActivity/BarChartActivity';
+import { KeyDataCardsList } from '../../components/KeyDataCard/KeyDataCardsList';
 
 type APIResponse = {
   data: UserMainData;
@@ -62,44 +58,22 @@ export const UserPage = () => {
   return (
     <Navbar>
       <div className={styles.mainContainer}>
-        <div>
-          <div className={styles.greeting}>
-            <span>Bonjour</span>
-            <span className={styles.name}>{`${userInfos.firstName}`}</span>
-          </div>
-          <p className={styles.subHeading}>
-            Félicitation ! Vous avez explosé vos objectifs hier 👏
-          </p>
+        <div className={styles.greeting}>
+          <span>Bonjour</span>
+          <span className={styles.name}>{`${userInfos.firstName}`}</span>
         </div>
+        <p className={styles.subHeading}>
+          Félicitation ! Vous avez explosé vos objectifs hier 👏
+        </p>
         <div className={styles.contentContainer}>
-          <div>
+          <div className={styles.chartsContainer}>
             <BarChartActivity userId={userId} />
+            <div className={styles.bottomChartsContainer}></div>
             {typeof (todayScore || score) === 'number' && (
               <RadialChartScore data={chartData} />
             )}
           </div>
-          <div className={styles.keyDataContainer}>
-            <KeyDataCard
-              dietaryTypes="Calories"
-              icon={<Calories />}
-              amount={`${keyData.calorieCount}kCal`}
-            />
-            <KeyDataCard
-              dietaryTypes="Proteines"
-              icon={<Protein />}
-              amount={`${keyData.proteinCount}g`}
-            />
-            <KeyDataCard
-              dietaryTypes="Glucides"
-              icon={<Carbs />}
-              amount={`${keyData.carbohydrateCount}g`}
-            />
-            <KeyDataCard
-              dietaryTypes="Lipides"
-              icon={<Fat />}
-              amount={`${keyData.lipidCount}kCal`}
-            />
-          </div>
+          <KeyDataCardsList keyData={keyData} />
         </div>
       </div>
     </Navbar>
