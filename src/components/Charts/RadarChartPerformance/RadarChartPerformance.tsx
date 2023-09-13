@@ -42,7 +42,20 @@ export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
 
   const reverseOrderOfData = Object.values(newData).reverse();
 
-  const renderPolarAngleAxis = ({ payload, x, y, cx, cy, ...rest }) => {
+  const renderPolarAngleAxis = ({
+    payload,
+    x,
+    y,
+    cx,
+    cy,
+    ...rest
+  }: {
+    payload: { value: string };
+    x: number;
+    y: number;
+    cx: number;
+    cy: number;
+  }) => {
     return (
       <Text
         {...rest}
@@ -56,42 +69,6 @@ export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
     );
   };
 
-  //     subject: 'Math',
-  //     A: 120,
-  //     B: 110,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Chinese',
-  //     A: 98,
-  //     B: 130,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'English',
-  //     A: 86,
-  //     B: 130,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Geography',
-  //     A: 99,
-  //     B: 100,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Physics',
-  //     A: 85,
-  //     B: 90,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'History',
-  //     A: 65,
-  //     B: 85,
-  //     fullMark: 150,
-  //   },
-  // ];
   return (
     <div className={styles.radarBarChartWrapper}>
       <RadarChart
