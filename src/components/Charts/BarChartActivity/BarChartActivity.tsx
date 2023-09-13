@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './BarChartActivity.module.scss';
-import { fetchUserData } from '../../services/userService';
-import { UserActivityData } from '../../services/userModels';
+import { fetchUserData } from '../../../services/userService';
+import { UserActivityData } from '../../../services/userModels';
 import {
   Bar,
   BarChart,

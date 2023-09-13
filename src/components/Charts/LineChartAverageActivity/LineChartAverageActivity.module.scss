@@ -1,0 +1,32 @@
+@import '../../../variables';
+
+.container {
+  width: 258px;
+  height: 26.8rem;
+}
+
+.customTooltip {
+  background-color: $white;
+  padding: 1rem;
+}
+
+.customLegendContainer {
+  width: 14.8rem;
+  height: 5.7rem;
+  padding: 2rem;
+  color: rgba($color: $white, $alpha: 0.5);
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+}
+
+.customActiveDotOuterRing {
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background-color: rgba($color: $grey, $alpha: 0.5);
+  .customActiveDotInnerRing {
+    height: 0.8rem;
+    width: 0.8rem;
+    background-color: $white;
+  }
+}

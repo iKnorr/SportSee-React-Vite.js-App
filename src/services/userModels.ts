@@ -52,7 +52,6 @@ export class UserMainData {
 }
 
 // Activity
-
 class Sessions {
   calories: number;
   day: string;
@@ -72,5 +71,55 @@ export class UserActivityData {
   constructor(userId: number, sessions: Sessions[]) {
     this.userId = userId;
     this.sessions = sessions;
+  }
+}
+
+// Average-Activity
+
+class AverageSession {
+  day: number;
+  sessionLength: number;
+
+  constructor(day: number, sessionLength: number) {
+    this.day = day;
+    this.sessionLength = sessionLength;
+  }
+}
+
+export class UserAverageActivityData {
+  userId: number;
+  sessions: AverageSession[];
+
+  constructor(userId: number, sessions: AverageSession[]) {
+    this.userId = userId;
+    this.sessions = sessions;
+  }
+}
+
+// User Performance
+
+export class UserPerformanceData {
+  userId: number;
+  kind: { [key: number]: string };
+  data: UserActivityEntry[];
+
+  constructor(
+    userId: number,
+    kind: { [key: number]: string },
+    data: UserActivityEntry[]
+  ) {
+    this.userId = userId;
+    this.kind = kind;
+    this.data = data;
+  }
+}
+
+class UserActivityEntry {
+  value: number;
+  kind: number;
+
+  constructor(value: number, kind: number) {
+    this.value = value;
+    this.kind = kind;
   }
 }

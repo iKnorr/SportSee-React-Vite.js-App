@@ -1,4 +1,4 @@
-import { Dot } from '../icons/Dot';
+import { Dot } from '../../icons/Dot';
 import styles from './BarChartLegend.module.scss';
 
 export const BarChartLegend = ({

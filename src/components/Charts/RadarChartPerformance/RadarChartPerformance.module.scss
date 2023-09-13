@@ -1,0 +1,16 @@
+@import '../../../variables';
+
+.radarBarChartWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26.3rem;
+  width: 25.8rem;
+  border-radius: 1rem;
+  background-color: #282d30;
+}
+
+.recharts-text,
+.recharts-polar-angle-axis-tick-value {
+  transform: translateX(-6rem);
+}

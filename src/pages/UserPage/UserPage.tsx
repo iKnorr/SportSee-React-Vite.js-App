@@ -7,9 +7,11 @@ import { UserMainData } from '../../services/userModels';
 import {
   ChartData,
   RadialChartScore,
-} from '../../components/RadialChartScore/RadialChartScore';
-import { BarChartActivity } from '../../components/BarChartActivity/BarChartActivity';
+} from '../../components/Charts/RadialChartScore/RadialChartScore';
+import { BarChartActivity } from '../../components/Charts/BarChartActivity/BarChartActivity';
 import { KeyDataCardsList } from '../../components/KeyDataCard/KeyDataCardsList';
+import { LineChartAverageActivity } from '../../components/Charts/LineChartAverageActivity/LineChartAverageActivity';
+import { RadarChartPerformance } from '../../components/Charts/RadarChartPerformance/RadarChartPerformance';
 
 type APIResponse = {
   data: UserMainData;
@@ -23,7 +25,7 @@ export const UserPage = () => {
     const fetchData = async () => {
       try {
         const response = await fetchUserData(userId);
-        console.log(response, 'RESPONSE');
+
         setUserData({
           data: new UserMainData(
             response?.data?.data.id,
@@ -68,10 +70,13 @@ export const UserPage = () => {
         <div className={styles.contentContainer}>
           <div className={styles.chartsContainer}>
             <BarChartActivity userId={userId} />
-            <div className={styles.bottomChartsContainer}></div>
-            {typeof (todayScore || score) === 'number' && (
-              <RadialChartScore data={chartData} />
-            )}
+            <div className={styles.bottomChartsContainer}>
+              <LineChartAverageActivity userId={userId} />
+              <RadarChartPerformance userId={userId} />
+              {typeof (todayScore || score) === 'number' && (
+                <RadialChartScore data={chartData} />
+              )}
+            </div>
           </div>
           <KeyDataCardsList keyData={keyData} />
         </div>
