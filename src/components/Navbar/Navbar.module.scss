@@ -31,6 +31,7 @@ $navbarHeight: 9.1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
   background-color: $black;
   width: 11.7rem;
 }

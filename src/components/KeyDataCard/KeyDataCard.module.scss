@@ -35,10 +35,9 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  max-width: 83.5rem;
 }
 
-@media (max-width: 1201px) {
+@media (max-width: 1280px) {
   .keyDataContainer {
     flex-direction: row;
   }

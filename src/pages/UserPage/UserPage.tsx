@@ -45,7 +45,6 @@ export const UserPage = () => {
   if (!userData) return null;
 
   const { userInfos, todayScore, score, keyData } = userData.data;
-  console.log(userData);
 
   const scoreValue = (todayScore ?? score) || 0;
 
