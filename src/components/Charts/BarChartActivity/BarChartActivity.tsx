@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './BarChartActivity.module.scss';
-import { fetchUserData } from '../../../services/userService';
-import { UserActivityData } from '../../../services/userModels';
+import { Session, fetchUserActivityData } from '../../../services/userService';
 import {
   Bar,
   BarChart,
@@ -14,47 +13,27 @@ import {
 import { BarChartLegendList } from '../BarChartLegend/BarChartLegendList';
 import { CustomTooltip } from './CustomTooltip';
 
-type APIResponse = {
-  data: UserActivityData;
-};
-
-type Session = {
-  day: string;
-  kilogram: number;
-  calories: number;
+type UserActivityType = {
+  userSessions: Session[];
 };
 
 export const BarChartActivity = ({ userId }: { userId?: string }) => {
-  const [userActivityData, setActivityUserData] = useState<APIResponse | null>(
-    null
-  );
+  const [userActivityData, setUserActivityData] = useState<
+    UserActivityType | undefined
+  >(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetchUserData(userId, 'activity');
-        response?.data?.data?.sessions?.forEach((session: Session) => {
-          const date = new Date(session.day);
-          const day = date.getDate();
-          session.day = day.toString();
-        });
+      const response = await fetchUserActivityData(userId);
 
-        setActivityUserData({
-          data: new UserActivityData(
-            response?.data?.data.userId,
-            response?.data?.data.sessions
-          ),
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      setUserActivityData(response);
     };
     fetchData();
   }, [userId]);
 
   if (!userActivityData) return null;
 
-  const { sessions } = userActivityData.data;
+  const { userSessions } = userActivityData;
 
   return (
     <div className={styles.container}>
@@ -64,7 +43,7 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
       </div>
       <ResponsiveContainer width="100%" height={340}>
         <BarChart
-          data={sessions}
+          data={userSessions}
           margin={{
             top: 10,
             right: 10,

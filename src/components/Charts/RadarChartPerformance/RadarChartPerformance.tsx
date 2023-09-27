@@ -1,48 +1,40 @@
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart, Text } from 'recharts';
 import styles from './RadarChartPerformance.module.scss';
 import { useEffect, useState } from 'react';
-import { UserPerformanceData } from '../../../services/userModels';
-import { fetchUserData } from '../../../services/userService';
-import { translateSubject } from '../../../services/chartService';
+import { fetchUserPerformanceData } from '../../../services/userService';
 
-type APIResponse = { data: UserPerformanceData };
+type UserActivityEntry = {
+  subject: string;
+  kind: number;
+  value: number;
+};
+
+export type UserPerformanceDataType = {
+  newData: UserActivityEntry[];
+};
 
 export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
-  const [userPerformanceData, setUserPerformanceData] =
-    useState<APIResponse | null>(null);
+  const [userPerformanceData, setUserPerformanceData] = useState<
+    UserPerformanceDataType | undefined
+  >(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchUserData(userId, 'performance');
-        setUserPerformanceData({
-          data: new UserPerformanceData(
-            response?.data?.data.userId,
-            response?.data?.data.kind,
-            response?.data?.data.data
-          ),
-        });
+        const response = await fetchUserPerformanceData(userId);
+
+        setUserPerformanceData(response);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchData();
   }, [userId]);
 
   if (!userPerformanceData) return null;
-
-  const { kind, data } = userPerformanceData.data;
-
-  const newData = data?.map((i, index) => {
-    return {
-      subject: translateSubject(kind[index + 1]),
-      kind: i.kind,
-      value: i.value,
-    };
-  });
-
+  const { newData } = userPerformanceData;
   const reverseOrderOfData = Object.values(newData).reverse();
-
   const renderPolarAngleAxis = ({
     payload,
     x,
