@@ -8,7 +8,7 @@ export const ErrorPage = () => {
       <p>Désolé, une erreur inattendue s'est produite. &#128546;</p>
       <Link
         to="/"
-        style={{ color: 'white' }}
+        style={{ color: 'black' }}
       >{`Retourner sur la page d’accueil`}</Link>
     </div>
   );
