@@ -30,9 +30,10 @@ export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
   }, [userId]);
 
   if (!userPerformanceData) return null;
+
   const { kind, data } = userPerformanceData.data;
 
-  const newData = data.map((i, index) => {
+  const newData = data?.map((i, index) => {
     return {
       subject: translateSubject(kind[index + 1]),
       kind: i.kind,

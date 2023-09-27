@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { UserPage } from './pages/UserPage/UserPage';
+import { ErrorPage } from './pages/ErrorPage/error-page';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: 'user/:userId',
     element: <UserPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

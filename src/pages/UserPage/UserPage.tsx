@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import styles from './UserPage.module.scss';
-import { fetchUserData } from '../../services/userService';
+import { fetchMainUserData } from '../../services/userService';
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
-import { UserMainData } from '../../services/userModels';
 import {
   ChartData,
   RadialChartScore,
@@ -13,28 +12,32 @@ import { KeyDataCardsList } from '../../components/KeyDataCard/KeyDataCardsList'
 import { LineChartAverageActivity } from '../../components/Charts/LineChartAverageActivity/LineChartAverageActivity';
 import { RadarChartPerformance } from '../../components/Charts/RadarChartPerformance/RadarChartPerformance';
 
-type APIResponse = {
-  data: UserMainData;
+type UserKeyData = {
+  calorieCount: number;
+  proteinCount: number;
+  carbohydrateCount: number;
+  lipidCount: number;
+};
+
+type UserMainDataType = {
+  firstName: string;
+  keyData: UserKeyData;
+  todayScore?: number;
+  score?: number;
 };
 
 export const UserPage = () => {
   const { userId } = useParams<{ userId?: string }>();
-  const [userData, setUserData] = useState<APIResponse | null>(null);
+  const [mainUserData, setMainUserData] = useState<
+    UserMainDataType | undefined
+  >(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchUserData(userId);
+        const response = await fetchMainUserData(userId);
 
-        setUserData({
-          data: new UserMainData(
-            response?.data?.data.id,
-            response?.data?.data.userInfos,
-            response?.data?.data.keyData,
-            response?.data?.data.todayScore,
-            response?.data?.data.score
-          ),
-        });
+        setMainUserData(response);
       } catch (error) {
         console.log(error);
       }
@@ -42,11 +45,11 @@ export const UserPage = () => {
     fetchData();
   }, [userId]);
 
-  if (!userData) return null;
+  if (!mainUserData) return null;
 
-  const { userInfos, todayScore, score, keyData } = userData.data;
+  const { firstName, score, keyData } = mainUserData;
 
-  const scoreValue = (todayScore ?? score) || 0;
+  const scoreValue = score || 0;
 
   const chartData: ChartData = [
     {
@@ -61,7 +64,7 @@ export const UserPage = () => {
       <div className={styles.mainContainer}>
         <div className={styles.greeting}>
           <span>Bonjour</span>
-          <span className={styles.name}>{`${userInfos.firstName}`}</span>
+          <span className={styles.name}>{`${firstName}`}</span>
         </div>
         <p className={styles.subHeading}>
           Félicitation ! Vous avez explosé vos objectifs hier 👏
@@ -71,8 +74,10 @@ export const UserPage = () => {
             <BarChartActivity userId={userId} />
             <div className={styles.bottomChartsContainer}>
               <LineChartAverageActivity userId={userId} />
-              <RadarChartPerformance userId={userId} />
-              {typeof (todayScore || score) === 'number' && (
+              {typeof userId === 'string' && (
+                <RadarChartPerformance userId={userId} />
+              )}
+              {typeof score === 'number' && (
                 <RadialChartScore data={chartData} />
               )}
             </div>

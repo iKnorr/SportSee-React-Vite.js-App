@@ -17,7 +17,7 @@ export const RadialChartScore = ({ data }: { data: ChartData }) => {
         className={styles.innerText}
         style={{ background: 'white', width: '14.3rem', height: '14.3rem' }}
       >
-        <p>{`${data[0].value}%`}</p>
+        <p>{`${data[0]?.value}%`}</p>
         <p>de votre</p>
         <p>objectif</p>
       </div>
