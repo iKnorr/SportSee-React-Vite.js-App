@@ -33,11 +33,7 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
     const fetchData = async () => {
       try {
         const response = await fetchUserData(userId, 'activity');
-        response?.data?.data?.sessions?.forEach((session: Session) => {
-          const date = new Date(session.day);
-          const day = date.getDate();
-          session.day = day.toString();
-        });
+
         setActivityUserData(DataMapper.transformUserActicityData(response));
       } catch (error) {
         console.log(error);

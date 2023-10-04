@@ -1,4 +1,4 @@
-export const userData = [
+export const mockUserData = [
   {
     id: 12,
     userInfos: {
@@ -31,7 +31,7 @@ export const userData = [
   },
 ];
 
-export const userActivity = [
+export const mockUserActivity = [
   {
     userId: 12,
     sessions: [
@@ -114,7 +114,7 @@ export const userActivity = [
   },
 ];
 
-export const UserAverageSessions = [
+export const mockUserAverageSessions = [
   {
     userId: 12,
     sessions: [
@@ -183,7 +183,7 @@ export const UserAverageSessions = [
   },
 ];
 
-export const userPerformance = [
+export const mockUserPerformance = [
   {
     userId: 12,
     kind: {
