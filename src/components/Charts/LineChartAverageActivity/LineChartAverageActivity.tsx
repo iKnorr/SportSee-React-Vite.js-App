@@ -1,29 +1,35 @@
 import { useEffect, useState } from 'react';
 import { fetchUserData } from '../../../services/userService';
-import { UserAverageActivityData } from '../../../services/userModels';
 import { Legend, Line, LineChart, Tooltip, XAxis } from 'recharts';
 import { CustomToolTipLineChart } from './CustomizedElement/CustomToolTipLineChart';
 import styles from './LineChartAverageActivity.module.scss';
 import { CustomizedActiveDot } from './CustomizedElement/CustomizedActiveDot';
 import { formatDay } from '../../../services/chartService';
 import { CustomLegend } from './CustomizedElement/CustomLegend';
+import { DataMapper } from '../../../services/dataMapper';
 
-type APIResponse = { data: UserAverageActivityData };
+type AverageSession = {
+  day: number;
+  sessionLength: number;
+};
+
+type AverageActivityType = {
+  averageSessions: AverageSession[];
+};
 
 export const LineChartAverageActivity = ({ userId }: { userId?: string }) => {
-  const [userAverageActivityData, setUserAverageActivityUserData] =
-    useState<APIResponse | null>(null);
+  const [userAverageActivityData, setUserAverageActivityUserData] = useState<
+    AverageActivityType | undefined
+  >(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetchUserData(userId, 'average-sessions');
-        setUserAverageActivityUserData({
-          data: new UserAverageActivityData(
-            response?.data?.data.userId,
-            response?.data?.data.sessions
-          ),
-        });
+
+        setUserAverageActivityUserData(
+          DataMapper.transformUserAverageSessionsData(response)
+        );
       } catch (error) {
         console.log(error);
       }
@@ -33,14 +39,14 @@ export const LineChartAverageActivity = ({ userId }: { userId?: string }) => {
 
   if (!userAverageActivityData) return null;
 
-  const { sessions } = userAverageActivityData.data;
+  const { averageSessions } = userAverageActivityData;
 
   return (
     <div className={styles.container}>
       <LineChart
         width={258}
         height={263}
-        data={sessions}
+        data={averageSessions}
         margin={{ left: 20, right: 20, top: 15, bottom: 10 }}
         style={{
           backgroundColor: '#E60000',
