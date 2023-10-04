@@ -3,6 +3,7 @@ import styles from './RadarChartPerformance.module.scss';
 import { useEffect, useState } from 'react';
 import { fetchUserData } from '../../../services/userService';
 import { DataMapper } from '../../../services/dataMapper';
+import { useNavigate } from 'react-router-dom';
 
 type UserActivityEntry = {
   subject: string;
@@ -18,6 +19,7 @@ export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
   const [userPerformanceData, setUserPerformanceData] = useState<
     UserPerformanceDataType | undefined
   >(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,7 @@ export const RadarChartPerformance = ({ userId }: { userId?: string }) => {
         );
       } catch (error) {
         console.log(error);
+        navigate('*');
       }
     };
     fetchData();

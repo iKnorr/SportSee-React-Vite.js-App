@@ -13,6 +13,7 @@ import {
 import { BarChartLegendList } from '../BarChartLegend/BarChartLegendList';
 import { CustomTooltip } from './CustomTooltip';
 import { DataMapper } from '../../../services/dataMapper';
+import { useNavigate } from 'react-router-dom';
 
 type Session = {
   day: string;
@@ -28,6 +29,7 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
   const [userActivityData, setActivityUserData] = useState<
     UserActivityType | undefined
   >(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +39,7 @@ export const BarChartActivity = ({ userId }: { userId?: string }) => {
         setActivityUserData(DataMapper.transformUserActicityData(response));
       } catch (error) {
         console.log(error);
+        navigate('*');
       }
     };
     fetchData();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './UserPage.module.scss';
 import { fetchUserData } from '../../services/userService';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
 import {
   ChartData,
@@ -33,6 +33,7 @@ export const UserPage = () => {
   const [userData, setUserData] = useState<UserMainDataType | undefined>(
     undefined
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,10 +42,12 @@ export const UserPage = () => {
         setUserData(DataMapper.transformMainUserData(response));
       } catch (error) {
         console.log(error);
+        navigate('*');
       }
     };
     fetchData();
   }, [userId]);
+
   if (!userData) return null;
 
   const { firstName, score, chartData, keyData } = userData;

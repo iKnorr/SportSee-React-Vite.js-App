@@ -7,6 +7,7 @@ import { CustomizedActiveDot } from './CustomizedElement/CustomizedActiveDot';
 import { formatDay } from '../../../services/chartService';
 import { CustomLegend } from './CustomizedElement/CustomLegend';
 import { DataMapper } from '../../../services/dataMapper';
+import { useNavigate } from 'react-router-dom';
 
 type AverageSession = {
   day: number;
@@ -21,6 +22,7 @@ export const LineChartAverageActivity = ({ userId }: { userId?: string }) => {
   const [userAverageActivityData, setUserAverageActivityUserData] = useState<
     AverageActivityType | undefined
   >(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +34,7 @@ export const LineChartAverageActivity = ({ userId }: { userId?: string }) => {
         );
       } catch (error) {
         console.log(error);
+        navigate('*');
       }
     };
     fetchData();

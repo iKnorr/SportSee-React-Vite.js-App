@@ -10,6 +10,19 @@ const BASE_URL = 'http://localhost:3000';
 
 const useMockData = false;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createApiResponse = (data: any) => {
+  if (!data) throw new Error('No data available!');
+
+  return {
+    data: {
+      data: {
+        ...data,
+      },
+    },
+  };
+};
+
 export const fetchUserData = async (
   userId: string | undefined,
   endpoint?: 'activity' | 'performance' | 'average-sessions'
@@ -19,13 +32,19 @@ export const fetchUserData = async (
   if (useMockData) {
     switch (endpoint) {
       case 'activity':
-        return mockUserActivity.find(data => data.userId);
+        return createApiResponse(mockUserActivity.find(data => data?.userId));
       case 'performance':
-        return mockUserPerformance.find(data => data.userId);
+        return createApiResponse(
+          mockUserPerformance.find(data => data?.userId)
+        );
       case 'average-sessions':
-        return mockUserAverageSessions.find(data => data.userId);
+        return createApiResponse(
+          mockUserAverageSessions.find(data => data?.userId)
+        );
       default:
-        return mockUserData.find(data => data.id === Number(userId));
+        return createApiResponse(
+          mockUserData.find(data => data?.id === Number(userId))
+        );
     }
   } else {
     // Fetch actual data from the API
@@ -33,8 +52,7 @@ export const fetchUserData = async (
       const response = await axios(
         `${BASE_URL}/user/${userId}/${endpointSegment}`
       );
-
-      return response?.data.data;
+      return response;
     } catch (error) {
       console.log(error);
     }
